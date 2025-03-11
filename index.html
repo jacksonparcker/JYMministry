@@ -686,6 +686,58 @@
     }
 
   </style>
+
+    <style>
+        .ad-container {
+            width: 100%;
+            max-width: 400px; /* Reduced width */
+            position: fixed;
+            bottom: 10px; /* Fixed to bottom of the screen */
+            right: 10px; /* Fixed to the right side of the screen */
+            z-index: 1000; /* Ensure it appears on top */
+            display: none; /* Initially hidden */
+            opacity: 0; /* Initial opacity for fade-in effect */
+            transform: translateX(100%); /* Slide-in effect starting point */
+            transition: all 1s ease-in-out; /* Transition for fade-in and slide-in effect */
+        }
+        .ad-container.show {
+            display: block;
+            opacity: 1; /* Final opacity for fade-in effect */
+            transform: translateX(0); /* Slide-in effect ending point */
+        }
+        .ad-container.hide {
+            opacity: 0; /* Final opacity for fade-out effect */
+            transition: opacity 1s ease-in-out; /* Transition for fade-out effect */
+        }
+        .ad-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .ad-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            font-size: 16px; /* Reduced font size */
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+        }
+        .close-button {
+            position: absolute;
+            width: 25px;
+            top: 10px;
+            right: 10px;
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
             
     </head>
     <div class="top-bar">
@@ -790,6 +842,15 @@
       <button type="submit">Subscribe</button>
     </form>
   </section>
+
+<div class="ad-container" id="ad">
+        <button class="close-button" onclick="closeAd()">X</button>
+        <img src="mis/a.jpg" alt="Ad Image">
+        <div class="ad-content">
+            
+        </div>
+    </div>
+
 <!-- Footer Section -->
 <footer>
   <!-- Top Section with Working Hours and Location -->
@@ -914,7 +975,25 @@
           navList.style.display = 'flex';
       }
   });
-</script>  
+</script> 
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const adElement = document.getElementById('ad');
+                adElement.classList.add('show');
+            }, 3000); // Change the time (in milliseconds) as needed
+
+            setTimeout(function() {
+                const adElement = document.getElementById('ad');
+                adElement.classList.add('hide');
+            }, 300000); // Change the time (in milliseconds) for the ad to disappear
+        });
+
+        function closeAd() {
+            const adElement = document.getElementById('ad');
+            adElement.classList.add('hide');
+        }
+    </script> 
 </body>
   <script>
       let sent = document.getElementById("sent");
